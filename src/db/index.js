@@ -11,7 +11,13 @@ if (process.env.DATABASE_URL) {
     database: process.env.PGDATABASE,
   };
 }
-const client = new pg.Client({ dbParams });
+const client = new pg.Client({ 
+  dbParams,   
+  ssl: {
+  rejectUnauthorized: false
+  } 
+});
+
 client
   .connect()
   .catch((e) => console.log(`Error connecting to Postgres server:\n${e}`));
